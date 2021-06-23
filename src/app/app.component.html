@@ -1,0 +1,136 @@
+<h2> Angular routers</h2>
+<p>
+</p>
+
+<nav class="navbar mx-3 navbar-expand-lg bg-primary navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="a">A</a>
+    <a class="navbar-brand" routerLink="b">B</a>
+    <a class="navbar-brand" routerLink="children/a"> children A</a>
+    <a class="navbar-brand" routerLink="children/b"> children B</a>
+    <a class="navbar-brand" routerLink="nested"> nested </a>
+    <a class="navbar-brand" (click)="navigate()"> lazy </a>
+  </div>
+</nav>
+
+<button mat-raised-button color="primary" (click)="isOpen = !isOpen">OPEN SECONDARY</button>
+
+<button mat-raised-button color="primary" (click)="isListOpen = !isListOpen">OPEN LIST</button>
+
+<button mat-raised-button color="primary" (click)="loadModule()">LOAD MODULE</button>
+
+<br />
+<br />
+
+Main:
+<router-outlet></router-outlet>
+
+<br />
+<br />
+
+
+<mat-drawer-container *ngIf="isOpen" class="example-container">
+  <mat-drawer mode="side" opened="isOpen">
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-route-one']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-one-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-two-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-three-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['']"> remove (it doesn't work) </a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    sub:
+    <router-outlet name="sub"></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+<mat-drawer-container *ngIf="isListOpen" class="example-container">
+  <mat-drawer mode="side" opened="isOpen">
+
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('ONE')"> sub-outlet-ONE </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('TWO')"> sub-outlet-TWO </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('THREE')"> sub-outlet-THREE </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('FOUR')"> sub-outlet-FOUR </a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <ng-container *ngFor="let item of menuList() | async">
+      <p>
+        {{item}}
+      </p>
+    </ng-container>
+
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-one-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-two-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['',{outlets: {'sub':['sub-sub-three-outlet']}}]"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" [routerLink]="['']"> remove (it doesn't work) </a>
+    </div>
+
+ -->
+
+
+<!-- 
+
+  <div>
+      <a class="navbar-brand" (click)="moveMenu('ONE')"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('TWO')"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('THREE')"> sub-outlet </a>
+    </div>
+    <div>
+      <a class="navbar-brand" (click)="moveMenu('FOUR')"> sub-outlet </a>
+    </div>
+
+<ng-container *ngFor="let item of menuList() | async">
+      <p>
+        {{item}}
+      </p>
+    </ng-container>
+
+ -->

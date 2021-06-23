@@ -1,0 +1,22 @@
+p {
+  font-family: Lato;
+}
+
+a {
+  margin-right: 1em;
+}
+
+.example-container {
+  width: 400px;
+  height: 600px;
+  margin: 10px;
+  /* border: 1px solid #555; */
+}
+
+mat-drawer[opened] {
+  background-color: rgb(245, 238, 238);
+}
+
+button[mat-raised-button] {
+  margin: 1rem;
+}
